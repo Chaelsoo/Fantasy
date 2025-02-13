@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,23 +7,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            Int      @id @default(autoincrement())
-  username      String   @unique
-  email         String   @unique
-  passwordHash  String
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  teams         Team[]
+generator dbml {
+  provider = "prisma-dbml-generator"
 }
 
-model Team {
+model Club {
   id            Int      @id @default(autoincrement())
-  name          String
-  userId        Int
-  user          User     @relation(fields: [userId], references: [id])
-  players       Player[]
+  name          String   @unique
+  logoUrl       String?  // URL to the team's logo
+  players       Player[] // Players belonging to this club
   createdAt     DateTime @default(now())
+  matchesAsTeamA Match[] @relation(name: "TeamA")
+  matchesAsTeamB Match[] @relation(name: "TeamB")
   updatedAt     DateTime @updatedAt
 }
 
@@ -37,9 +26,89 @@ model Player {
   id            Int      @id @default(autoincrement())
   name          String
   position      String
-  club          String
+  clubId        Int
+  club          Club     @relation(fields: [clubId], references: [id])
   price         Float
   teams         Team[]
+  performances  Performance[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+model User {
+  id            Int      @id @default(autoincrement())
+  username      String   @unique
+  email         String   @unique
+  passwordHash  String
+  team          Team?    // One user can have only one team
+  leaderboards  Leaderboard[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Team {
+  id            Int      @id @default(autoincrement())
+  name          String
+  userId        Int      @unique // Each team belongs to one user
+  user          User     @relation(fields: [userId], references: [id])
+  players       Player[]
+  gameweeks     Gameweek[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Gameweek {
+  id            Int      @id @default(autoincrement())
+  startDate     DateTime
+  endDate       DateTime
+  matches       Match[]  
+  teams         Team[]
+  leaderboards  Leaderboard[]
+  performances  Performance[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Performance {
+  id            Int      @id @default(autoincrement())
+  playerId      Int
+  player        Player   @relation(fields: [playerId], references: [id])
+  gameweekId    Int
+  gameweek      Gameweek @relation(fields: [gameweekId], references: [id])
+  goalsScored   Int      @default(0)
+  assists       Int      @default(0)
+  cleanSheet    Boolean  @default(false)
+  yellowCards   Int      @default(0)
+  redCards      Int      @default(0)
+  totalPoints   Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+
+model Leaderboard {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  user          User     @relation(fields: [userId], references: [id])
+  gameweekId    Int
+  gameweek      Gameweek @relation(fields: [gameweekId], references: [id])
+  totalPoints   Int      @default(0) // User's score for this gameweek
+  totalScore    Int      @default(0) // User's cumulative score across all gameweeks
+  rank          Int      // User's rank for this gameweek
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Match {
+  id            Int      @id @default(autoincrement())
+  gameweekId    Int
+  gameweek      Gameweek @relation(fields: [gameweekId], references: [id])
+  teamAId       Int
+  teamA         Club     @relation(name: "TeamA", fields: [teamAId], references: [id])
+  teamBId       Int
+  teamB         Club     @relation(name: "TeamB", fields: [teamBId], references: [id])
+  teamAScore    Int
+  teamBScore    Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+} 
