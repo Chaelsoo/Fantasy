@@ -1,13 +1,10 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "@/lib/prisma";
 import bcrypt from 'bcryptjs';
 
-const prisma = new PrismaClient();
 
 export async function POST(req, res) {
   const body = await req.json(); 
-  console.log("req.body", body);
   const { username, email, password } = body;
-  console.log("req.body", req.body);
   // Hash the password
   const passwordHash = await bcrypt.hash(password, 10);
 

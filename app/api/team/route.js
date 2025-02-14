@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "@/lib/prisma";
 
-const prisma = new PrismaClient();
 
 export async function GET(req) {
     // const userId = authenticate(req);
@@ -19,4 +18,3 @@ export async function GET(req) {
       return Response.json({ message: 'Failed to fetch team', error: error.message }, { status: 400 });
     }
   }
-  

@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "@/lib/prisma";
 
-const prisma = new PrismaClient();
 
 export async function POST(req) {
   try {
@@ -25,7 +24,7 @@ export async function POST(req) {
     if (benchCount !== 4) {
       return Response.json({ message: 'A team must have 4 players on the bench' }, { status: 400 });
     }
-    
+
     const team = await prisma.team.create({
       data: {
         name,
@@ -40,7 +39,7 @@ export async function POST(req) {
   } catch (error) {
     console.error(error); 
     return Response.json({ message: 'Team creation failed', error: error.message }, { status: 400 });
-  }
+  } 
 }
 
 

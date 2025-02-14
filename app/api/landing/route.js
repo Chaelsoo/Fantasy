@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req, res) {
     try {
@@ -9,7 +8,6 @@ export async function GET(req, res) {
             return res.status(400).json({ error: 'User not authenticated' });
         }
 
-        // Fetch current gameweek ID from appState
         const appState = await prisma.appState.findFirst({
             select: {
                 currentGameweekId: true
@@ -17,7 +15,6 @@ export async function GET(req, res) {
         });
         const currentGameweekId = appState.currentGameweekId;
 
-        // Fetch total points for the logged-in user in the current gameweek
         const userPointsResult = await prisma.leaderboard.findFirst({
             where: {
                 userId: userId,
@@ -30,7 +27,6 @@ export async function GET(req, res) {
         
         const totalPoints = userPointsResult ? userPointsResult.points : 0;
 
-        // Fetch maximum points of all users for the current gameweek
         const maxPointsResult = await prisma.leaderboard.aggregate({
             _max: {
                 totalPoints: true
@@ -41,7 +37,6 @@ export async function GET(req, res) {
         });
         const maxPoints = maxPointsResult._max.points;
 
-        // Fetch average points of all users for the current gameweek
         const avgPointsResult = await prisma.leaderboard.aggregate({
             _avg: {
                 totalPoints: true
@@ -52,7 +47,6 @@ export async function GET(req, res) {
         });
         const avgPoints = avgPointsResult._avg.points;
 
-        // Send the response
         res.json({
             currentGameweekId,
             totalPoints,
