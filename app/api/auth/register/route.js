@@ -3,9 +3,11 @@ import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-export default async function POST(req, res) {
-  const { username, email, password } = req.body;
-
+export async function POST(req, res) {
+  const body = await req.json(); 
+  console.log("req.body", body);
+  const { username, email, password } = body;
+  console.log("req.body", req.body);
   // Hash the password
   const passwordHash = await bcrypt.hash(password, 10);
 
@@ -19,8 +21,8 @@ export default async function POST(req, res) {
       },
     });
 
-    res.status(201).json({ message: 'User created', user });
+    return Response.json({ message: 'User created', user }, { status: 201 });
   } catch (error) {
-    res.status(400).json({ message: 'User creation failed', error: error.message });
+    return Response.json({ message: 'User creation failed', error: error.message }, { status: 400 });
   }
 }

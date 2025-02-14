@@ -4,26 +4,23 @@ import jwt from 'jsonwebtoken';
 
 const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
-  const { email, password } = req.body;
-
+export async function POST(req) {
   try {
+    const body = await req.json();
+    const { email, password } = body;
+
     // Find the user by email
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return Response.json({ message: 'User not found' }, { status: 404 });
     }
 
     // Compare passwords
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
-
+    console.log("isPasswordValid", isPasswordValid);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Invalid password' });
+      return Response.json({ message: 'Invalid password' }, { status: 401 });
     }
 
     // Generate a JWT token
@@ -31,8 +28,8 @@ export default async function handler(req, res) {
       expiresIn: '1h',
     });
 
-    res.status(200).json({ message: 'Login successful', token });
+    return Response.json({ message: 'Login successful', token }, { status: 200 });
   } catch (error) {
-    res.status(400).json({ message: 'Login failed', error: error.message });
+    return Response.json({ message: 'Login failed', error: error.message }, { status: 400 });
   }
 }

@@ -53,6 +53,7 @@ model Team {
   user          User     @relation(fields: [userId], references: [id])
   players       Player[]
   gameweeks     Gameweek[]
+  budget        Float    
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -94,7 +95,6 @@ model Leaderboard {
   gameweek      Gameweek @relation(fields: [gameweekId], references: [id])
   totalPoints   Int      @default(0) // User's score for this gameweek
   totalScore    Int      @default(0) // User's cumulative score across all gameweeks
-  rank          Int      // User's rank for this gameweek
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
@@ -112,3 +112,10 @@ model Match {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 } 
+
+model AppState {
+  id              Int      @id @default(autoincrement())
+  currentGameweekId Int?    // ID of the current gameweek
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
