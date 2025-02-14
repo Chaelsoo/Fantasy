@@ -11,7 +11,6 @@ datasource db {
 model Club {
   id            Int      @id @default(autoincrement())
   name          String   @unique
-  logoUrl       String?  // URL to the team's logo
   players       Player[] // Players belonging to this club
   createdAt     DateTime @default(now())
   matchesAsTeamA Match[] @relation(name: "TeamA")
@@ -24,6 +23,7 @@ model Player {
   name          String
   position      String
   clubId        Int
+  logoUrl       String?  // URL to the team's logo
   club          Club     @relation(fields: [clubId], references: [id])
   price         Float
   teams         Team[]
