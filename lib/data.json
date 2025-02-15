@@ -2,7 +2,7 @@
     "clubs": [
         {
             "club_name": "Mouloudia Club d'Alger - MCA",
-            "kit_image_url": "Club_Kits/mca_kit.png",
+            "kit_image_url": "mca_kit.png",
             "players": [
                 {
                     "name": "Andy Delort",
@@ -163,7 +163,7 @@
         },
         {
             "club_name": "Chabab Riadhi Belouizdad - CRB",
-            "kit_image_url": "Club_Kits/crb_kit.png",
+            "kit_image_url": "crb_kit.png",
             "players": [
                 {
                     "name": "Khanyisa Mayo",
@@ -304,7 +304,7 @@
         },
         {
             "club_name": "Union sportive de la médina d'Alger - USMA",
-            "kit_image_url": "Club_Kits/usma_kit.png",
+            "kit_image_url": "usma_kit.png",
             "players": [
                 {
                     "name": "Adalid Terrazas",
@@ -470,7 +470,7 @@
         },
         {
             "club_name": "Jeunesse sportive de Kabylie - JSK",
-            "kit_image_url": "Club_Kits/jsk_kit.png",
+            "kit_image_url": "jsk_kit.png",
             "players": [
                 {
                     "name": "Ryad Boudebouz",
@@ -616,7 +616,7 @@
         },
         {
             "club_name": "Paradou Athletic Club - PAC",
-            "kit_image_url": "Club_Kits/parado_kit.png",
+            "kit_image_url": "parado_kit.png",
             "players": [
                 {
                     "name": "Adil Boulbina",
@@ -782,7 +782,7 @@
         },
         {
             "club_name": "Club sportif constantinois - CSC",
-            "kit_image_url": "Club_Kits/csc_kit.png",
+            "kit_image_url": "csc_kit.png",
             "players": [
                 {
                     "name": "Brahim Dib",
@@ -923,7 +923,7 @@
         },
         {
             "club_name": "Entente sportive sétifienne - ESS",
-            "kit_image_url": "Club_Kits/ess_kit.png",
+            "kit_image_url": "ess_kit.png",
             "players": [
                 {
                     "name": "Abdou Salam Ag Jiddou",
@@ -1064,7 +1064,7 @@
         },
         {
             "club_name": "Association sportive olympique de Chlef - ASOC",
-            "kit_image_url": "Club_Kits/asoc_kit.png",
+            "kit_image_url": "asoc_kit.png",
             "players": [
                 {
                     "name": "Yawo Agbagno",
@@ -1215,7 +1215,7 @@
         },
         {
             "club_name": "Union sportive madinet Khenchela - USMK",
-            "kit_image_url": "Club_Kits/usmk_kit.png",
+            "kit_image_url": "usmk_kit.png",
             "players": [
                 {
                     "name": "Hamid Djaouchi",
@@ -1346,7 +1346,7 @@
         },
         {
             "club_name": "Olympique Akbou - OA",
-            "kit_image_url": "Club_Kits/akbou_kit.png",
+            "kit_image_url": "akbou_kit.png",
             "players": [
                 {
                     "name": "Ali Haroun",
@@ -1492,7 +1492,7 @@
         },
         {
             "club_name": "Mouloudia Club d'Oran - MCO",
-            "kit_image_url": "Club_Kits/mco_kit.png",
+            "kit_image_url": "mco_kit.png",
             "players": [
                 {
                     "name": "Karim Mammar",
@@ -1638,7 +1638,7 @@
         },
         {
             "club_name": "Mouloudia Club El Bayadh - MCB",
-            "kit_image_url": "Club_Kits/bayadh_kit.png",
+            "kit_image_url": "bayadh_kit.png",
             "players": [
                 {
                     "name": "Abdelkadir Salhi",
@@ -1784,7 +1784,7 @@
         },
         {
             "club_name": "Jeunesse sportive de Saoura - JSS",
-            "kit_image_url": "Club_Kits/saoura_kit.png",
+            "kit_image_url": "saoura_kit.png",
             "players": [
                 {
                     "name": "Mohamed Souibaâh",
@@ -1930,7 +1930,7 @@
         },
         {
             "club_name": "Nadjem Chabab Magra - NCM",
-            "kit_image_url": "Club_Kits/nmagra_kit.png", 
+            "kit_image_url": "nmagra_kit.png", 
             "players": [
                 {
                     "name": "Adil Djabout",
@@ -2081,7 +2081,7 @@
         },
         {
             "club_name": "Espérance sportive de Mostaganem - ESM",
-            "kit_image_url": "Club_Kits/esm_kit.png",
+            "kit_image_url": "esm_kit.png",
             "players": [
                 {
                     "name": "Toufik Addadi",
@@ -2227,7 +2227,7 @@
         },
         { 
             "club_name": "Union sportive de Biskra - USB",
-            "kit_image_url": "Club_Kits/usb.png",
+            "kit_image_url": "usb.png",
             "players": [
                 {
                     "name": "Oussama Mellala",

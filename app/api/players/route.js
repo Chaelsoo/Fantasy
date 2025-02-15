@@ -4,6 +4,8 @@ const prisma = new PrismaClient();
 
 export async function GET(req) {
     try {
+        const userId = req.headers.get('x-user-id');
+        console.log("userId", userId);
         const players = await prisma.player.findMany();  
   
         if (!players || players.length === 0) {

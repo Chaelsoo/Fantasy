@@ -12,3 +12,6 @@ function generateMatchups(clubs) {
   
     return matchups;
   }
+
+
+  

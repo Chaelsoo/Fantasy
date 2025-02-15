@@ -8,7 +8,7 @@ async function simulateMatch(players, gameweekId) {
     };
   
     for (let i = 0; i < matchDuration; i++) {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait 1 second
+      await new Promise((resolve) => setTimeout(resolve, 1000)); 
   
       const player = players[Math.floor(Math.random() * players.length)];
   

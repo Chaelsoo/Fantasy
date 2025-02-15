@@ -3,11 +3,12 @@ const prisma = new PrismaClient();
 
 export async function GET(req, res) {
     try {
-        const userId = req.userId;  // AUTH MIDDLEWARE
-
+        const userId = req.headers.get('x-user-id');
+        console.log("userId", userId);
+            
         if (!userId) {
             return res.status(400).json({ error: 'User not authenticated' });
-        }
+        }   
 
         const appState = await prisma.appState.findFirst({
             select: {

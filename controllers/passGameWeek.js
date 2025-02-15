@@ -4,14 +4,12 @@ const prisma = new PrismaClient();
 
 export async function passGameWeek(req, res) {
     try {
-        // Fetch the current gameweek ID and its end date from AppState
         const appState = await prisma.appState.findFirst();
         if (!appState || !appState.currentGameweekId) {
             return res.status(400).json({ error: 'Current gameweek not set' });
         }
         const currentGameweekId = appState.currentGameweekId;
 
-        // Fetch the current gameweek's end date
         const currentGameweek = await prisma.gameweek.findUnique({
             where: {
                 id: currentGameweekId
@@ -41,7 +39,6 @@ export async function passGameWeek(req, res) {
             return res.status(400).json({ error: 'No upcoming gameweek found' });
         }
 
-        // Update the AppState to reflect the next gameweek
         await prisma.appState.update({
             where: {
                 id: appState.id
@@ -51,7 +48,6 @@ export async function passGameWeek(req, res) {
             }
         });
 
-        // Send success response with the new gameweek info
         res.json({
             message: 'Successfully passed to the next gameweek',
             nextGameweekId: nextGameweek.id,

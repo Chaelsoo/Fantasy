@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { SignJWT } from 'jose';
+
 
 const prisma = new PrismaClient();
 
@@ -24,9 +25,13 @@ export async function POST(req) {
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    });
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET); // Encode the secret
+    const token = await new SignJWT({ userId: user.id }) // Payload includes userId
+      .setProtectedHeader({ alg: 'HS256' }) // Algorithm
+      .setIssuedAt() // Set issued at time
+      .setExpirationTime('24h') // Token expires in 24 hours
+      .sign(secret); // Sign the token
+
 
     return Response.json({ message: 'Login successful', token }, { status: 200 });
   } catch (error) {
